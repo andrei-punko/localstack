@@ -40,7 +40,10 @@ chmod +x docker/1.start-db-container-n-localstack.sh
 docker/1.start-db-container-n-localstack.sh
 ```
 
-## 2) Start backend with `localstack` profile
+## 2) Start backend applicaiton with `localstack` profile
+
+***IMPORTANT: The backend application itself is not part of this repository.  
+This repository contains only LocalStack-related configuration and startup scripts used by that application.***
 
 Use Spring profile `localstack`:
 
