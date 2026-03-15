@@ -1,4 +1,4 @@
-# Local AWS Profile with LocalStack
+# Example of LocalStack usage 
 
 This setup allows running the backend locally with AWS beans enabled and AWS infrastructure emulated by LocalStack.
 
@@ -8,7 +8,6 @@ Windows:
 
 ```bat
 docker\1.start-db-container-n-localstack.bat
-docker\2.start-backend-vs-localstack.bat
 ```
 
 Linux/macOS:
@@ -16,7 +15,6 @@ Linux/macOS:
 ```bash
 chmod +x docker/1.start-db-container-n-localstack.sh docker/run-backend.sh docker/2.start-backend-vs-localstack.sh
 docker/1.start-db-container-n-localstack.sh
-docker/2.start-backend-vs-localstack.sh
 ```
 
 ## 1) Start infrastructure (DB + LocalStack)
@@ -40,9 +38,9 @@ chmod +x docker/1.start-db-container-n-localstack.sh
 docker/1.start-db-container-n-localstack.sh
 ```
 
-## 2) Start backend applicaiton with `localstack` profile
+## 2) Start backend application with `localstack` profile
 
-***IMPORTANT: The backend application itself is not part of this repository.  
+***! IMPORTANT: The backend application itself is not part of this repository.  
 This repository contains only LocalStack-related configuration and startup scripts used by that application.***
 
 Use Spring profile `localstack`:
