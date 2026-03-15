@@ -1,0 +1,36 @@
+services:
+  db-andd3dfx-server:
+    image: postgres:16.8
+    container_name: db-andd3dfx-server
+    hostname: db-andd3dfx-server
+    shm_size: 256m
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - ${DOCKER_DB_DIR}/db-andd3dfx-server:/var/lib/postgresql/data
+      - ../src/main/resources/db/db-init.sql:/docker-entrypoint-initdb.d/01-db-init.sql
+      - ../src/sql/docker-db-user-init.sql:/docker-entrypoint-initdb.d/02-docker-db-user-init.sql
+    command: postgres -c 'fsync=off' -c 'shared_preload_libraries=pg_stat_statements,auto_explain' -c 'pg_stat_statements.track=all' -c 'max_connections=100' -c 'auto_explain.log_analyze=1' -c 'auto_explain.log_buffers=1' -c 'auto_explain.log_min_duration=10000' -c 'auto_explain.log_verbose=1'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres123
+      - TZ="UTC"
+
+  localstack:
+    build:
+      context: ..
+      dockerfile: docker/localstack/Dockerfile
+    container_name: andd3dfx-localstack
+    ports:
+      - "127.0.0.1:4566:4566"
+    environment:
+      - SERVICES=s3,sqs,ses
+      - AWS_DEFAULT_REGION=us-east-2    # This value should be similar to spring.cloud.aws.region.static value
+      - AWS_RESOURCES_PROPS_FILE=/etc/localstack/application-aws-resources.properties
+    volumes:
+      - andd3dfx-localstack-data:/var/lib/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../src/main/resources/application-localstack.properties:/etc/localstack/application-aws-resources.properties:ro
+
+volumes:
+  andd3dfx-localstack-data:
