@@ -4,6 +4,11 @@ set -eu
 PROPS_FILE="${AWS_RESOURCES_PROPS_FILE:-/etc/localstack/application-aws-resources.properties}"
 AWS_REGION="${AWS_DEFAULT_REGION:-us-east-2}"
 
+# Expected properties in $PROPS_FILE (mounted from application-localstack.properties):
+# - required for S3 bootstrap: aws.document-bucket
+# - used for SQS auto-creation: every key matching aws.*-queue
+# - optional for SES bootstrap: sender.email-address
+
 if [ ! -f "$PROPS_FILE" ]; then
   echo "LocalStack init: properties file not found: $PROPS_FILE"
   exit 1

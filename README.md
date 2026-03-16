@@ -82,7 +82,10 @@ The script validates local DB readiness before backend startup:
 
 ## Notes
 
-- `application-localstack.properties` is a config of application.
+- `application-localstack.properties` is the source of AWS resource names both for Spring app and LocalStack bootstrap.
+- This file is mounted into LocalStack container as `/etc/localstack/application-aws-resources.properties` (see `docker/docker-compose.yml`).
+- Script `docker/localstack/init/10-create-resources.sh` reads `aws.document-bucket` from this config and creates S3 bucket with this exact name.
+- The same script reads all properties matching `aws.*-queue` and auto-creates corresponding SQS queues.
 - AWS clients are redirected to `http://localhost:4566`.
 - LocalStack resources are initialized from the same `application-localstack.properties` file.
 
