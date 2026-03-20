@@ -2,7 +2,7 @@
 
 This setup allows running the backend locally with AWS beans enabled and AWS infrastructure emulated by LocalStack.
 
-## Quick start
+## Quick way
 
 Windows:
 
@@ -17,7 +17,9 @@ chmod +x docker/1.start-db-container-n-localstack.sh docker/run-backend.sh docke
 docker/1.start-db-container-n-localstack.sh
 ```
 
-## 1) Start infrastructure (DB + LocalStack)
+## Non-quick way
+
+### 1) Start infrastructure (DB + LocalStack)
 
 From repository root:
 
@@ -38,7 +40,7 @@ chmod +x docker/1.start-db-container-n-localstack.sh
 docker/1.start-db-container-n-localstack.sh
 ```
 
-## 2) Start backend application with `localstack` profile
+### 2) Start backend application with `localstack` profile
 
 ***! IMPORTANT: The backend application itself is not part of this repository.  
 This repository contains only LocalStack-related configuration and startup scripts used by that application.***
