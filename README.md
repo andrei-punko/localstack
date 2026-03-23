@@ -45,6 +45,13 @@ docker/1.start-db-container-n-localstack.sh
 ***! IMPORTANT: The backend application itself is not part of this repository.  
 This repository contains only LocalStack-related configuration and startup scripts used by that application.***
 
+
+If you need a clean rebuild before start (for example after branch switch), run:
+
+```bash
+./mvnw clean
+```
+
 Use Spring profile `localstack`:
 
 ```bash
@@ -67,13 +74,6 @@ On Linux/macOS from repository root you can use:
 
 ```bash
 chmod +x docker/run-backend.sh docker/2.start-backend-vs-localstack.sh
-docker/2.start-backend-vs-localstack.sh
-```
-
-If you need a clean rebuild before start (for example after branch switch), run:
-
-```bash
-./mvnw clean
 docker/2.start-backend-vs-localstack.sh
 ```
 
